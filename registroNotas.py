@@ -29,14 +29,29 @@ def main():
     print("Bienvenidos al registro de notas")
 
     while True:
-        comando = input("Ingrese comando (R: Registrar Alumnos, C: Calificar a los alumnos, P: Promedio de notas de los alumnos, S: Suma de notas de los alumnos, X: Salir): ")
+        print("R: Registrar Alumnos")
+        print("C: Calificar a los alumnos")
+        print("P: Promedio de notas de los alumnos")
+        print("S: Suma de notas de los alumnos")
+        print("X: Salir")
+        comando = input("Ingrese comando: ")
 
         if comando.upper() == 'R':
             nombre = input("Ingrese nombre del alumno: ")
             apellido = input("Ingrese apellido del alumno: ")
-            edad = int(input("Ingrese edad del alumno: "))
+            while True:
+                try:
+                    edad = int(input("Ingrese edad del alumno: "))   
+                    if edad < 1 or edad > 100: 
+                        print("La edad debe estar en un rango de 1 a 100. Intente nuevamente.")
+                        continue
+                    edad = edad
+                    break
+                except ValueError as e:
+                    print(e)
             nacionalidad = input("Ingrese nacionalidad del alumno: ")
 
+            
             alumno = Alumno(nombre, apellido, edad, 0, nacionalidad)
             lista_alumnos.append(alumno)
             guardar_alumnos(lista_alumnos)
